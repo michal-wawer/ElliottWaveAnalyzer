@@ -1,4 +1,4 @@
-from models.WavePattern import WavePattern
+from elliott_wave_analyzer.WavePattern import WavePattern
 import pandas as pd
 import time
 import plotly.graph_objects as go

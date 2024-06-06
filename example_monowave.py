@@ -1,5 +1,5 @@
-from models.MonoWave import MonoWaveDown, MonoWaveUp
-from models.helpers import plot_monowave
+from elliott_wave_analyzer.MonoWave import MonoWaveDown, MonoWaveUp
+from elliott_wave_analyzer.helpers import plot_monowave
 import numpy as np
 import pandas as pd
 

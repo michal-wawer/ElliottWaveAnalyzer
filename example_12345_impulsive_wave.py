@@ -1,9 +1,9 @@
 from __future__ import annotations
-from models.WavePattern import WavePattern
-from models.WaveRules import Impulse, LeadingDiagonal
-from models.WaveAnalyzer import WaveAnalyzer
-from models.WaveOptions import WaveOptionsGenerator5
-from models.helpers import plot_pattern
+from elliott_wave_analyzer.WavePattern import WavePattern
+from elliott_wave_analyzer.WaveRules import Impulse, LeadingDiagonal
+from elliott_wave_analyzer.WaveAnalyzer import WaveAnalyzer
+from elliott_wave_analyzer.WaveOptions import WaveOptionsGenerator5
+from elliott_wave_analyzer.helpers import plot_pattern
 import pandas as pd
 import numpy as np
 import yfinance as yf

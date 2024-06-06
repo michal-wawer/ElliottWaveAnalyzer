@@ -1,4 +1,4 @@
-from models.MonoWave import MonoWaveUp
+from elliott_wave_analyzer.MonoWave import MonoWaveUp
 import numpy as np
 
 

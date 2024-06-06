@@ -1,4 +1,4 @@
-from models.WaveOptions import WaveOptionsGenerator5, WaveOptionsGenerator3
+from elliott_wave_analyzer.WaveOptions import WaveOptionsGenerator5, WaveOptionsGenerator3
 
 # WaveOptions for 5 fold impulsive wave
 wo = WaveOptionsGenerator5(5)

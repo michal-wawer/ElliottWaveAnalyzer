@@ -1,8 +1,8 @@
-from models.MonoWave import MonoWaveUp, MonoWaveDown
-from models.WaveOptions import WaveOptionsGenerator5, WaveOptionsGenerator3
-from models.WaveCycle import WaveCycle
-from models.WavePattern import WavePattern
-from models.WaveRules import Impulse, Correction, TDWave
+from elliott_wave_analyzer.MonoWave import MonoWaveUp, MonoWaveDown
+from elliott_wave_analyzer.WaveOptions import WaveOptionsGenerator5, WaveOptionsGenerator3
+from elliott_wave_analyzer.WaveCycle import WaveCycle
+from elliott_wave_analyzer.WavePattern import WavePattern
+from elliott_wave_analyzer.WaveRules import Impulse, Correction, TDWave
 import numpy as np
 import pandas as pd
 

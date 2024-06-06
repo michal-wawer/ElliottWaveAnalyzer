@@ -1,6 +1,6 @@
 from __future__ import annotations
 import numpy as np
-from models.functions import hi, lo, next_hi, next_lo
+from elliott_wave_analyzer.functions import hi, lo, next_hi, next_lo
 
 class MonoWave:
     def __init__(self,

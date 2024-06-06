@@ -1,6 +1,6 @@
 import yfinance as yf
 
-from models.helpers import convert_yf_data
+from elliott_wave_analyzer.helpers import convert_yf_data
 
 df = yf.download(tickers='AAPL',
                  interval="1d",

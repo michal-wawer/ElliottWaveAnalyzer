@@ -1,4 +1,4 @@
-from models.WavePattern import WavePattern
+from elliott_wave_analyzer.WavePattern import WavePattern
 
 class WaveCycle:
     """

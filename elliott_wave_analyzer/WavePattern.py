@@ -1,5 +1,5 @@
-from models.WaveRules import WaveRule
-from models.MonoWave import MonoWaveUp, MonoWaveDown
+from elliott_wave_analyzer.WaveRules import WaveRule
+from elliott_wave_analyzer.MonoWave import MonoWaveUp, MonoWaveDown
 
 
 class WavePattern:
