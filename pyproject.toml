@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "elliott-wave-analyzer"
+version = "0.1.0"
+description = ""
+authors = []
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+certifi = "2024.2.2"
+charset-normalizer = "3.3.2"
+idna = "3.7"
+llvmlite = "0.42.0"
+lxml = "5.2.2"
+multitasking = "0.0.11"
+numba = "0.59.1"
+numpy = "1.26.4"
+pandas = "2.2.2"
+plotly = "5.22.0"
+python-dateutil = "2.9.0"
+pytz = "2022.5"
+requests = "2.32.3"
+six = "1.16.0"
+tenacity = "8.3.0"
+urllib3 = "2.2.1"
+wincertstore = "0.2"
+yfinance = "0.2.40"
+kaleido = "0.1.0.post1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
