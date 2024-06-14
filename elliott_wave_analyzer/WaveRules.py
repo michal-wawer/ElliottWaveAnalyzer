@@ -6,6 +6,7 @@ class WaveRule(ABC):
     """
     base class for implementing wave rules
     """
+
     def __init__(self, name: str):
         self.name = name
         self.conditions = self.set_conditions()
@@ -34,21 +35,21 @@ class Impulse(WaveRule):
                 "function": lambda wave1, wave2: wave2.low > wave1.low,
                 "message": "End of Wave2 is lower than Start of Wave1.",
             },
-            "w2_2": {
-                "waves": ["wave1", "wave2"],
-                "function": lambda wave1, wave2: wave2.length >= 0.2 * wave1.length,
-                "message": "Wave2 is shorten than 20% of Wave1.",
-            },
-            "w2_3": {
-                "waves": ["wave1", "wave2"],
-                "function": lambda wave1, wave2: 9 * wave2.duration > wave1.duration,
-                "message": "Wave2 is longer than 9x Wave1",
-            },
+            # "w2_2": {
+            #     "waves": ["wave1", "wave2"],
+            #     "function": lambda wave1, wave2: wave2.length >= 0.2 * wave1.length,
+            #     "message": "Wave2 is shorten than 20% of Wave1.",
+            # },
+            # "w2_3": {
+            #     "waves": ["wave1", "wave2"],
+            #     "function": lambda wave1, wave2: 9 * wave2.duration > wave1.duration,
+            #     "message": "Wave2 is longer than 9x Wave1",
+            # },
             # WAVE 3
             "w3_1": {
                 "waves": ["wave1", "wave3", "wave5"],
                 "function": lambda wave1, wave3, wave5: not (
-                    wave3.length < wave5.length and wave3.length < wave1.length
+                        wave3.length < wave5.length and wave3.length < wave1.length
                 ),
                 "message": "Wave3 is the shortest Wave.",
             },
@@ -57,42 +58,88 @@ class Impulse(WaveRule):
                 "function": lambda wave1, wave3: wave3.high > wave1.high,
                 "message": "End of Wave3 is lower than End of Wave1",
             },
-            "w3_3": {
-                "waves": ["wave1", "wave3"],
-                "function": lambda wave1, wave3: wave3.length >= wave1.length / 3.0,
-                "message": "Wave3 is shorter than 1/3 of Wave1",
-            },
-            "w3_4": {
-                "waves": ["wave2", "wave3"],
-                "function": lambda wave2, wave3: wave3.length > wave2.length,
-                "message": "Wave3 shorter than Wave2",
-            },
-            "w3_5": {
-                "waves": ["wave1", "wave3"],
-                "function": lambda wave1, wave3: 7 * wave3.duration > wave1.duration,
-                "message": "Wave3 more than 7 times longer than Wave1.",
-            },
+            # "w3_3": {
+            #     "waves": ["wave1", "wave3"],
+            #     "function": lambda wave1, wave3: wave3.length >= wave1.length / 3.0,
+            #     "message": "Wave3 is shorter than 1/3 of Wave1",
+            # },
+            # "w3_4": {
+            #     "waves": ["wave2", "wave3"],
+            #     "function": lambda wave2, wave3: wave3.length > wave2.length,
+            #     "message": "Wave3 shorter than Wave2",
+            # },
+            # "w3_5": {
+            #     "waves": ["wave1", "wave3"],
+            #     "function": lambda wave1, wave3: 7 * wave3.duration > wave1.duration,
+            #     "message": "Wave3 more than 7 times longer than Wave1.",
+            # },
             # WAVE 4
             "w4_1": {
                 "waves": ["wave1", "wave4"],
                 "function": lambda wave1, wave4: wave4.low > wave1.high,
                 "message": "End of Wave4 is lower than End of Wave1",
             },
-            "w4_2": {
-                "waves": ["wave2", "wave4"],
-                "function": lambda wave2, wave4: wave4.length > wave2.length / 3.0,
-                "message": "Length of Wave4 is shorter than 1/3 of End of Wave1",
-            },
+            # "w4_2": {
+            #     "waves": ["wave2", "wave4"],
+            #     "function": lambda wave2, wave4: wave4.length > wave2.length / 3.0,
+            #     "message": "Length of Wave4 is shorter than 1/3 of End of Wave1",
+            # },
             # WAVE 5
             "w5_1": {
                 "waves": ["wave3", "wave5"],
                 "function": lambda wave3, wave5: wave3.high < wave5.high,
                 "message": "End of Wave5 is lower than End of Wave3",
             },
-            "w5_2": {
-                "waves": ["wave1", "wave5"],
-                "function": lambda wave1, wave5: wave5.length < 2.0 * wave1.length,
-                "message": "Wave5 is longer (value wise) than Wave1",
+            # "w5_2": {
+            #     "waves": ["wave1", "wave5"],
+            #     "function": lambda wave1, wave5: wave5.length < 2.0 * wave1.length,
+            #     "message": "Wave5 is longer (value wise) than Wave1",
+            # },
+        }
+
+        return conditions
+
+
+class ImpulseDownward(WaveRule):
+    """
+    Rules for an impulsive wave according to
+
+    https://www.goldseiten-forum.com/attachment/113839-elliottwellentutorial-pdf/
+
+    """
+
+    def set_conditions(self):
+        # condition returns TRUE -> no exit
+        conditions = {  # WAVE 2
+            "w2_1": {
+                "waves": ["wave1", "wave2"],
+                "function": lambda wave1, wave2: wave2.high > wave1.high,
+                "message": "End of Wave2 is higher than Start of Wave1.",
+            },
+            # WAVE 3
+            "w3_1": {
+                "waves": ["wave1", "wave3", "wave5"],
+                "function": lambda wave1, wave3, wave5: not (
+                        wave3.length < wave5.length and wave3.length < wave1.length
+                ),
+                "message": "Wave3 is the shortest Wave.",
+            },
+            "w3_2": {
+                "waves": ["wave1", "wave3"],
+                "function": lambda wave1, wave3: wave3.low > wave1.low,
+                "message": "End of Wave3 is higher than End of Wave1",
+            },
+            # WAVE 4
+            "w4_1": {
+                "waves": ["wave1", "wave4"],
+                "function": lambda wave1, wave4: wave4.high > wave1.low,
+                "message": "End of Wave4 is higher than End of Wave1",
+            },
+            # WAVE 5
+            "w5_1": {
+                "waves": ["wave3", "wave5"],
+                "function": lambda wave3, wave5: wave3.low < wave5.low,
+                "message": "End of Wave5 is higher than End of Wave3",
             },
         }
 
@@ -117,7 +164,66 @@ class Correction(WaveRule):
             "w2_2": {
                 "waves": ["wave1", "wave3"],
                 "function": lambda waveA, waveC: waveA.low > waveC.low,
-                "message": "End of WaveB is higher than Start of WaveA.",
+                "message": "End of WaveC is higher than end of WaveA.",
+            },
+            "w2_3": {
+                "waves": ["wave1", "wave2"],
+                "function": lambda waveA, waveB: waveA.length > waveB.length,
+                "message": "WaveB longer than WaveA.",
+            },
+            "w2_4": {
+                "waves": ["wave1", "wave2"],
+                "function": lambda waveA, waveB: waveB.duration < 10.0 * waveA.duration,
+                "message": "WaveB longer (time wise) than 10 x WaveA.",
+            },
+            "w2_5": {
+                "waves": ["wave1", "wave3"],
+                "function": lambda waveA, waveC: waveC.length > 0.6 * waveA.length,
+                "message": "WaveC shorter (value wise) than 0.60 x WaveA.",
+            },
+            "w2_6": {
+                "waves": ["wave1", "wave3"],
+                "function": lambda waveA, waveC: waveC.length < 2.61 * waveA.length,
+                "message": "WaveB longer (value wise) than 2.61 x WaveA.",
+            },
+            "w2_7": {
+                "waves": ["wave1", "wave2"],
+                "function": lambda waveA, waveB: waveB.length < 0.618 * waveA.length,
+                "message": "WaveB longer (value wise) than 0.618 x WaveA.",
+            },
+            "w3_1": {
+                "waves": ["wave1", "wave3"],
+                "function": lambda waveA, waveC: waveC.duration < 10.0 * waveA.duration,
+                "message": "WaveB longer (value wise) than 2.61 x WaveA.",
+            },
+            "w3_2": {
+                "waves": ["wave1", "wave2"],
+                "function": lambda waveA, waveB: waveB.length > 0.35 * waveA.length,
+                "message": "WaveB shorter (value wise) than 0.35 x WaveA.",
+            },
+        }
+        return conditions
+
+
+class CorrectionUpward(WaveRule):
+    """
+    Rules for a corrective wave according to
+
+    https://www.goldseiten-forum.com/attachment/113839-elliottwellentutorial-pdf/
+
+    """
+
+    def set_conditions(self):
+        conditions = {  # WAVE B
+            "w2_1": {
+                "waves": ["wave1", "wave2"],
+                "function": lambda waveA, waveB: waveA.low > waveB.low,
+                "message": "End of WaveB is lower than Start of WaveA.",
+            },
+            "w2_2": {
+                "waves": ["wave1", "wave3"],
+                "function": lambda waveA, waveC: waveA.high > waveC.high,
+                "message": "End of WaveC is lower than end of WaveA.",
             },
             "w2_3": {
                 "waves": ["wave1", "wave2"],
@@ -230,7 +336,7 @@ class LeadingDiagonal(WaveRule):
             "w3_1": {
                 "waves": ["wave1", "wave3", "wave5"],
                 "function": lambda wave1, wave3, wave5: not (
-                    wave3.length < wave5.length and wave3.length < wave1.length
+                        wave3.length < wave5.length and wave3.length < wave1.length
                 ),
                 "message": "Wave3 is the shortest Wave.",
             },

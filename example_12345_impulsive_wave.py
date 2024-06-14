@@ -1,22 +1,20 @@
 from __future__ import annotations
 from elliott_wave_analyzer.WavePattern import WavePattern
-from elliott_wave_analyzer.WaveRules import Impulse, LeadingDiagonal
+from elliott_wave_analyzer.WaveRules import Impulse, LeadingDiagonal, Correction
 from elliott_wave_analyzer.WaveAnalyzer import WaveAnalyzer
-from elliott_wave_analyzer.WaveOptions import WaveOptionsGenerator5
+from elliott_wave_analyzer.WaveOptions import WaveOptionsGenerator5, WaveOptionsGenerator3
 from elliott_wave_analyzer.helpers import plot_pattern
 import pandas as pd
 import numpy as np
 import yfinance as yf
-from pprint import pprint
 
-# end_date = pd.Timestamp.now()
-# start_date = end_date - pd.DateOffset(days=360)
-# df = yf.download('MSFT', start=start_date, end=end_date)
+end_date = pd.Timestamp.now()
+start_date = end_date - pd.DateOffset(days=360)
+df = yf.download('TSLA', start=start_date, end=end_date).reset_index()
 
-df = pd.read_csv(r'data\btc-usd_1d.csv')
 idx_start = np.argmin(np.array(list(df['Low'])))
 
-wa = WaveAnalyzer(df=df, verbose=False) # .reset_index()
+wa = WaveAnalyzer(df=df, verbose=False)
 wave_options_impulse = WaveOptionsGenerator5(up_to=15)  # generates WaveOptions up to [15, 15, 15, 15, 15]
 
 impulse = Impulse('impulse')
