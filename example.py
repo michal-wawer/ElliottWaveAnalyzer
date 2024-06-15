@@ -24,8 +24,8 @@ def describe_pattern(wave_pattern: WavePattern, wave_type: str):
 
 # Get data
 end_date = pd.Timestamp.now()
-start_date = end_date - pd.DateOffset(days=700)
-df = yf.download('INTC', start=start_date, end=end_date).reset_index()
+start_date = end_date - pd.DateOffset(days=180)
+df = yf.download('AAPL', start=start_date, end=end_date).reset_index()
 
 # Find lowest value to start calculating impulse UP wave
 # TODO: It can also be impulse down! (second case)

@@ -95,7 +95,7 @@ class WaveAnalyzer:
             if self.verbose: print("Wave 4 has no End in Data")
             return False
 
-        if wave2.low > np.min(self.lows[wave2.low_idx:wave4.low_idx]):
+        if self.lows[wave2.low_idx:wave4.low_idx].any() and wave2.low > np.min(self.lows[wave2.low_idx:wave4.low_idx]):
             return False
 
         wave5 = MonoWaveUp(lows=self.lows, highs=self.highs, dates=self.dates, idx_start=wave4_end, skip=wave_config[4])
